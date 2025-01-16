@@ -1,28 +1,18 @@
 'use client'
 
 import { invoke } from '@tauri-apps/api/core'
-import { useEffect, useState } from 'react'
-import { listen } from '@tauri-apps/api/event'
+import { useEffect } from 'react'
 
 import { Button } from '~/components/ui/button'
-import { AnimeData } from '~/types/anime'
 
 const Home = () => {
-  const [anime, setAnime] = useState<AnimeData>();
-
   useEffect(() => {
-    invoke('scan_anime')
-
     onEvent()
 
-    return () => { }
+    return () => {}
   }, [])
 
-  const onEvent = async () => {
-    listen<AnimeData>('anime_detected', event => {
-      setAnime(event.payload)
-    })
-  }
+  const onEvent = async () => {}
 
   return (
     <div>
@@ -36,9 +26,7 @@ const Home = () => {
         Invoke
       </Button>
 
-      <span className='text-foreground'>
-        {anime && JSON.stringify(anime)}
-      </span>
+      <span className="text-foreground">{}</span>
     </div>
   )
 }
